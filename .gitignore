@@ -1,0 +1,6 @@
+target
+.env
+extensions
+node_modules
+.exe
+.dmg
