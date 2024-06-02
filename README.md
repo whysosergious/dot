@@ -3,16 +3,18 @@ config repo, with setup
 
 ----
 
-to start:
-
-## prerequisites:
+## prerequisites
 - git
 - github cli (auth)
+- rustup [https://www.rust-lang.org/tools/install]
 
-## main packages
- - nushell
- - wezterm
- - rustup (rustc, rustup, cargo)
+
+```cli
+cargo install nu --features=datafeame
+```
+
+
+
 
 ----
 

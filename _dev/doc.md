@@ -17,4 +17,8 @@ settings -> time & languages -> language -> administrative language settings
 
 and checking the box for 'Use Unicode UTF-8 for worldwide language support' in region setting
 
+
+***** UPDATE - non issue
+
+''
 ---

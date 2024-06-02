@@ -1,4 +1,4 @@
-hey, help structure and write a cofiguration reposition with whish I'd like to be able to reproduce my setup preferablyy painlessly :)
+hey, help structure and write a cofiguration script(nushell) with which I'd like to be able to reproduce my setup preferablyy painlessly :)
 
 I've collected some configs for this session into a 'dot' repo: https://github.com/whysosergious/dot
 
