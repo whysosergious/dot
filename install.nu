@@ -24,40 +24,42 @@ source $"($nu.home-path)/AppData/Roaming/nushell/config.nu";
 
 let cargo_bin_path = "~/.cargo/bin";
 path add .cargo/bin;
-#
-#
-#
-# let packages = [
-#   "broot",
-#   "zoxide",
-#   "starship",
-#   "fzf",
-#   "ripgrep",
-#   # nushell plugins
-#   "nu_plugin_query",
-#   "nu_plugin_inc",
-#   "nu_plugin_gstat",
-#   "nu_plugin_pnet",
-#   "nu_plugin_formats",
-#   "nu_plugin_dialog",
-#   "nu_plugin_image",
-#   "nu_plugin_clipboard",
-#   "nu_plugin_desctop_notifications",
-#   "nu_plugin_port_list",
-#   "nu_plugin_audio_hook",  
-# ]
-#
-# # install packages
-# $packages | each { |pkg| 
-#   print $"installing ($pkg)";
-#
-#   cargo-binstall $pkg -y;
-# }
-#
-# # add nushell plugins
-# ls ~/.cargo/bin | each { |bin| 
-#   if $bin.contains("nu_plugin_") {
-#     print $"adding ($bin) to plugins";
-#     nu plugin add $bin;
-#   }
-# }
+
+
+
+let packages = [
+  "nu",
+  "broot",
+  "zoxide",
+  "starship",
+  "fzf",
+  "ripgrep",
+  # nushell plugins
+  "nu_plugin_query",
+  "nu_plugin_inc",
+  "nu_plugin_gstat",
+  "nu_plugin_pnet",
+  "nu_plugin_formats",
+]
+
+# install packages
+$packages | each { |pkg| 
+  print $"installing ($pkg)";
+
+  cargo-binstall $pkg -y --force;
+}
+
+
+let installed_plugins = ls $"($nu.home-path)/.cargo/bin" | where name =~ "nu_plugin" | get name;
+
+
+print $installed_plugins;
+
+# add nushell plugins
+$installed_plugins | each { |p| 
+  print $"adding plugin ($p)";
+    nu -c $"plugin add ($p)";
+}
+
+
+print "finished, restart your terminal";

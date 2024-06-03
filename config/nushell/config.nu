@@ -320,6 +320,6 @@ export def main [] {
 
 source ./custom_scripts/helpers.nu
 
-use ~/.cache/starship/init.nu
+# use ~/.cache/starship/init.nu
 
 source ~/.cache/zoxide/init.nu
