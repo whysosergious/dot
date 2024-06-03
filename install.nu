@@ -44,6 +44,7 @@ let packages = [
   "starship",
   "fzf",
   "ripgrep",
+  "carapache",
   # nushell plugins
   "nu_plugin_query",
   "nu_plugin_inc",
