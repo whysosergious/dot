@@ -319,6 +319,7 @@ export def main [] {
 # )
 
 source ./custom_scripts/helpers.nu
+use ./custom_scripts/task.nu
 
 # use ~/.cache/starship/init.nu
 
