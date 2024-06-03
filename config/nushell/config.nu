@@ -32,7 +32,7 @@ alias trs = tree-sitter
 
 ## vital for config & env
 # add path to env
-def --env "path add" [path: string = "."] {
+export def --env "path add" [path: string = "."] {
 
   if $nu.os-info.name == "windows" { 
     $env.PATH = $env.Path
@@ -58,16 +58,6 @@ def --env "path add" [path: string = "."] {
     $env.Path = $env.PATH
   } 
 }
-
-# short-hand for 'ls -d' for --du as in size.
-def lsd [--asc (-r)] {
-  if ($asc == true) {
-    ls --du -a | sort-by size -r
-  } else {
-    ls --du -a | sort-by size
-  }
-}
-
 
 
 # path
@@ -318,8 +308,11 @@ export def main [] {
 # $env.config.hooks.env_change.PWD | append (source nu-hooks/direnv/config.nu)
 # )
 
+use mkx.nu
+use task.nu
+
 source ./custom_scripts/helpers.nu
-use ./custom_scripts/task.nu
+
 
 # use ~/.cache/starship/init.nu
 

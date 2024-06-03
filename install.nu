@@ -1,9 +1,13 @@
-#!bin/env nu
+#!/usr/bin/env nu
 
 # before running this script, make sure you installed the following:
 # git, github cli, rustup (rust, rustup, cargo), wezterm, neovim
 # then open wezterm and run 
 # `cargo install cargo-binstall ; cargo binstall nu`
+
+def --env mv_cfg [] {
+
+print "moving config files";
 
 let nu_config_dir = if $nu.os-info.name == "windows" {
     ($nu.home-path | path join "AppData/Roaming")
@@ -23,9 +27,15 @@ cp ./config/.wezterm.lua $"($nu.home-path)/.wezterm.lua";
 source $"($nu.home-path)/AppData/Roaming/nushell/config.nu";
 
 let cargo_bin_path = "~/.cargo/bin";
-path add .cargo/bin;
 
 
+print "finished moving config files";
+
+}
+
+def --env install_packages [] {
+
+print "installing packages";
 
 let packages = [
   "nu",
@@ -63,3 +73,15 @@ $installed_plugins | each { |p|
 
 
 print "finished, restart your terminal";
+
+}
+
+
+def --env main [--move(-m) , --install(-i)] {
+    if $move {
+        mv_cfg
+    } 
+    if $install {
+        install_packages
+    }
+}
