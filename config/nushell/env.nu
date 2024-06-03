@@ -1,6 +1,7 @@
 
 $env.SHELL = nu
 $env.EDITOR = nvim
+$env.VISUAL = nvim
 $env.NP_PATH = "~/.np/"
 
 $env.STARSHIP_SHELL = nu
@@ -16,8 +17,8 @@ $env.PROMPT_COMMAND_RIGHT = ""
 # The prompt indicators are environmental variables that represent
 # the state of the prompt
 $env.PROMPT_INDICATOR = ""
-$env.PROMPT_INDICATOR_VI_INSERT = ": "
-$env.PROMPT_INDICATOR_VI_NORMAL = "〉"
+$env.PROMPT_INDICATOR_VI_INSERT = "〉"
+$env.PROMPT_INDICATOR_VI_NORMAL = "ⁿ "
 $env.PROMPT_MULTILINE_INDICATOR = "::: "
 
 

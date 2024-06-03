@@ -8,7 +8,7 @@ export def --env main [str: string, name: string, bin_path = '~/.cargo/bin'] {
     $res | save -f $tgt_path;
 
     if ($nu.os-info.name == 'windows') {
-      $"nu ($name)" | save -f $"($tgt_path).bat";
+      $'nu ($tgt_path)' | str replace "'" "" | save -f $"($tgt_path).bat";
       print "added .bat with script"
     } else {
       nu -c $'chmod 755 (echo $tgt_path)';
