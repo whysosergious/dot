@@ -79,140 +79,133 @@ export def ensure_path_exists [path: string, create_missing: bool = true] {
 # https://www.nushell.sh/book/coloring_and_theming.html
 # And here is the theme collection
 # https://github.com/nushell/nu_scripts/tree/main/themes
-let dark_theme = {
-    # color for nushell primitives
-    separator: white
-    leading_trailing_space_bg: { attr: n } # no fg, no bg, attr none effectively turns this off
-    header: green_bold
-    empty: blue
-    # Closures can be used to choose colors for specific values.
-    # The value (in this case, a bool) is piped into the closure.
-    # eg) {|| if $in { 'light_cyan' } else { 'light_gray' } }
-    bool: light_cyan
-    int: white
-    filesize: cyan
-    duration: white
-    date: purple
-    range: white
-    float: white
-    string: white
-    nothing: white
-    binary: white
-    cell-path: white
-    row_index: green_bold
-    record: white
-    list: white
-    block: white
-    hints: dark_gray
-    search_result: { bg: red fg: white }
-    shape_and: purple_bold
-    shape_binary: purple_bold
-    shape_block: blue_bold
-    shape_bool: light_cyan
-    shape_closure: green_bold
-    shape_custom: green
-    shape_datetime: cyan_bold
-    shape_directory: cyan
-    shape_external: cyan
-    shape_externalarg: green_bold
-    shape_external_resolved: light_yellow_bold
-    shape_filepath: cyan
-    shape_flag: blue_bold
-    shape_float: purple_bold
-    # shapes are used to change the cli syntax highlighting
-    shape_garbage: { fg: white bg: red attr: b}
-    shape_globpattern: cyan_bold
-    shape_int: purple_bold
-    shape_internalcall: cyan_bold
-    shape_keyword: cyan_bold
-    shape_list: cyan_bold
-    shape_literal: blue
-    shape_match_pattern: green
-    shape_matching_brackets: { attr: u }
-    shape_nothing: light_cyan
-    shape_operator: yellow
-    shape_or: purple_bold
-    shape_pipe: purple_bold
-    shape_range: yellow_bold
-    shape_record: cyan_bold
-    shape_redirection: purple_bold
-    shape_signature: green_bold
-    shape_string: green
-    shape_string_interpolation: cyan_bold
-    shape_table: blue_bold
-    shape_variable: purple
-    shape_vardecl: purple
+let aci = {
+    separator: "#b6b6b6"
+    leading_trailing_space_bg: { attr: "n" }
+    header: { fg: "#83ff08" attr: "b" }
+    empty: "#0883ff"
+    bool: {|| if $in { "#1eff8e" } else { "light_gray" } }
+    int: "#b6b6b6"
+    filesize: {|e|
+        if $e == 0b {
+            "#b6b6b6"
+        } else if $e < 1mb {
+            "#08ff83"
+        } else {{ fg: "#0883ff" }}
+    }
+    duration: "#b6b6b6"
+    date: {|| (date now) - $in |
+        if $in < 1hr {
+            { fg: "#ff0883" attr: "b" }
+        } else if $in < 6hr {
+            "#ff0883"
+        } else if $in < 1day {
+            "#ff8308"
+        } else if $in < 3day {
+            "#83ff08"
+        } else if $in < 1wk {
+            { fg: "#83ff08" attr: "b" }
+        } else if $in < 6wk {
+            "#08ff83"
+        } else if $in < 52wk {
+            "#0883ff"
+        } else { "dark_gray" }
+    }
+    range: "#b6b6b6"
+    float: "#b6b6b6"
+    string: "#b6b6b6"
+    nothing: "#b6b6b6"
+    binary: "#b6b6b6"
+    cellpath: "#b6b6b6"
+    row_index: { fg: "#83ff08" attr: "b" }
+    record: "#b6b6b6"
+    list: "#b6b6b6"
+    block: "#b6b6b6"
+    hints: "dark_gray"
+    search_result: { fg: "#ff0883" bg: "#b6b6b6" }
+
+    shape_and: { fg: "#8308ff" attr: "b" }
+    shape_binary: { fg: "#8308ff" attr: "b" }
+    shape_block: { fg: "#0883ff" attr: "b" }
+    shape_bool: "#1eff8e"
+    shape_custom: "#83ff08"
+    shape_datetime: { fg: "#08ff83" attr: "b" }
+    shape_directory: "#08ff83"
+    shape_external: "#08ff83"
+    shape_externalarg: { fg: "#83ff08" attr: "b" }
+    shape_filepath: "#08ff83"
+    shape_flag: { fg: "#0883ff" attr: "b" }
+    shape_float: { fg: "#8308ff" attr: "b" }
+    shape_garbage: { fg: "#FFFFFF" bg: "#FF0000" attr: "b" }
+    shape_globpattern: { fg: "#08ff83" attr: "b" }
+    shape_int: { fg: "#8308ff" attr: "b" }
+    shape_internalcall: { fg: "#08ff83" attr: "b" }
+    shape_list: { fg: "#08ff83" attr: "b" }
+    shape_literal: "#0883ff"
+    shape_match_pattern: "#83ff08"
+    shape_matching_brackets: { attr: "u" }
+    shape_nothing: "#1eff8e"
+    shape_operator: "#ff8308"
+    shape_or: { fg: "#8308ff" attr: "b" }
+    shape_pipe: { fg: "#8308ff" attr: "b" }
+    shape_range: { fg: "#ff8308" attr: "b" }
+    shape_record: { fg: "#08ff83" attr: "b" }
+    shape_redirection: { fg: "#8308ff" attr: "b" }
+    shape_signature: { fg: "#83ff08" attr: "b" }
+    shape_string: "#83ff08"
+    shape_string_interpolation: { fg: "#08ff83" attr: "b" }
+    shape_table: { fg: "#0883ff" attr: "b" }
+    shape_variable: "#8308ff"
+
+    background: "#0d1926"
+    foreground: "#b4e1fd"
+    cursor: "#b4e1fd"
 }
 
-let light_theme = {
-    # color for nushell primitives
-    separator: dark_gray
-    leading_trailing_space_bg: { attr: n } # no fg, no bg, attr none effectively turns this off
-    header: green_bold
-    empty: blue
-    # Closures can be used to choose colors for specific values.
-    # The value (in this case, a bool) is piped into the closure.
-    # eg) {|| if $in { 'dark_cyan' } else { 'dark_gray' } }
-    bool: dark_cyan
-    int: dark_gray
-    filesize: cyan_bold
-    duration: dark_gray
-    date: purple
-    range: dark_gray
-    float: dark_gray
-    string: dark_gray
-    nothing: dark_gray
-    binary: dark_gray
-    cell-path: dark_gray
-    row_index: green_bold
-    record: dark_gray
-    list: dark_gray
-    block: dark_gray
-    hints: dark_gray
-    search_result: { fg: white bg: red }
-    shape_and: purple_bold
-    shape_binary: purple_bold
-    shape_block: blue_bold
-    shape_bool: light_cyan
-    shape_closure: green_bold
-    shape_custom: green
-    shape_datetime: cyan_bold
-    shape_directory: cyan
-    shape_external: cyan
-    shape_externalarg: green_bold
-    shape_external_resolved: light_purple_bold
-    shape_filepath: cyan
-    shape_flag: blue_bold
-    shape_float: purple_bold
-    # shapes are used to change the cli syntax highlighting
-    shape_garbage: { fg: white bg: red attr: b}
-    shape_globpattern: cyan_bold
-    shape_int: purple_bold
-    shape_internalcall: cyan_bold
-    shape_keyword: cyan_bold
-    shape_list: cyan_bold
-    shape_literal: blue
-    shape_match_pattern: green
-    shape_matching_brackets: { attr: u }
-    shape_nothing: light_cyan
-    shape_operator: yellow
-    shape_or: purple_bold
-    shape_pipe: purple_bold
-    shape_range: yellow_bold
-    shape_record: cyan_bold
-    shape_redirection: purple_bold
-    shape_signature: green_bold
-    shape_string: green
-    shape_string_interpolation: cyan_bold
-    shape_table: blue_bold
-    shape_variable: purple
-    shape_vardecl: purple
+# External completer 
+ let fish_completer = {|spans|
+    fish --command $'complete "--do-complete=($spans | str join " ")"'
+    | $"value(char tab)description(char newline)" + $in
+    | from tsv --flexible --no-infer
+}
+let carapace_completer = {|spans: list<string>|
+    carapace $spans.0 nushell ...$spans
+    | from json
+    | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
 }
 
-# External completer example
-# let carapace_completer = {|spans|
-#     carapace $spans.0 nushell ...$spans | from json
-# }
+let zoxide_completer = {|spans: list<string>|
+    zoxide completions $spans
+    | from json
+    | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
+}
+
+# This completer will use carapace by default
+let external_completer = {|spans|
+    let expanded_alias = scope aliases
+    | where name == $spans.0
+    | get -i 0.expansion
+
+    let spans = if $expanded_alias != null {
+        $spans
+        | skip 1
+        | prepend ($expanded_alias | split row ' ' | take 1)
+    } else {
+        $spans
+    }
+
+    match $spans.0 {
+        # carapace completions are incorrect for nu
+        nu => $fish_completer
+        # fish completes commits and branch names in a nicer way
+        git => $fish_completer
+        # carapace doesn't have completions for asdf
+        asdf => $fish_completer
+        # use zoxide completions for zoxide commands
+        __zoxide_z | __zoxide_zi => $zoxide_completer
+        _ => $carapace_completer
+    } | do $in $spans
+}
 
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
@@ -283,7 +276,7 @@ $env.config = {
         external: {
             enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
             max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-            completer: null # check 'carapace_completer' above as an example
+            completer: $external_completer # check 'carapace_completer' above as an example
         }
         use_ls_colors: true # set this to true to enable file/path/directory completions using LS_COLORS
     }
@@ -299,7 +292,7 @@ $env.config = {
         vi_normal: block # block, underscore, line, blink_block, blink_underscore, blink_line, inherit to skip setting cursor shape (underscore is the default)
     }
 
-    color_config: $dark_theme # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
+    color_config: $aci # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
     use_grid_icons: true
     footer_mode: "25" # always, never, number_of_rows, auto
     float_precision: 2 # the precision for displaying floats in tables
@@ -381,7 +374,7 @@ shell_integration: {
                 col_padding: 2
             }
             style: {
-                text: orange
+                text:  cyan 
                 selected_text: { attr: r }
                 description_text: yellow
                 match_text: { attr: u }
@@ -414,7 +407,7 @@ shell_integration: {
                 correct_cursor_pos: false
             }
             style: {
-                text: orange
+                text:  cyan 
                 selected_text: { attr: r }
                 description_text: yellow
                 match_text: { attr: u }
@@ -430,7 +423,7 @@ shell_integration: {
                 page_size: 10
             }
             style: {
-                text: orange
+                text:  cyan 
                 selected_text: purple_bold
                 description_text: yellow
             }
@@ -448,7 +441,7 @@ shell_integration: {
                 description_rows: 10
             }
             style: {
-                text: orange
+                text:  cyan 
                 selected_text: purple_bold                
                 description_text: yellow
             }
@@ -967,10 +960,20 @@ shell_integration: {
 
 
 
+
+# cmd 〉ls | get name | str join "\nuse "
+# use gen_json_schema.nu
+
+# module scripts
 use mkx.nu
+use ns.nu
 use task.nu
 
+# collections & configs
+source one_liners.nu
 source helpers.nu
+source starship.nu
 
-
+# generated
 source ~/.cache/zoxide/init.nu
+source ~/.cache/carapace/init.nu

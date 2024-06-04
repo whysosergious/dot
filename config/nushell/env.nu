@@ -2,24 +2,9 @@
 $env.SHELL = nu
 $env.EDITOR = nvim
 $env.VISUAL = nvim
-$env.NP_PATH = "~/.np/"
 
 $env.STARSHIP_SHELL = nu
 
-def create_left_prompt [] {
-    starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)' 
-}
-
-# Use nushell functions to define your right and left prompt
-$env.PROMPT_COMMAND = { || create_left_prompt }
-$env.PROMPT_COMMAND_RIGHT = ""
-
-# The prompt indicators are environmental variables that represent
-# the state of the prompt
-$env.PROMPT_INDICATOR = ""
-$env.PROMPT_INDICATOR_VI_INSERT = "〉"
-$env.PROMPT_INDICATOR_VI_NORMAL = "ⁿ "
-$env.PROMPT_MULTILINE_INDICATOR = "::: "
 
 
 
@@ -120,4 +105,7 @@ zoxide init nushell | save -f ~/.cache/zoxide/init.nu
 # starship init nu | save -f ~/.cache/starship/init.nu
 
 
-
+# carapace
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,pwsh,inshellisense' # optional
+mkdir ~/.cache/carapace
+carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
