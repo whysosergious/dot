@@ -959,19 +959,29 @@ shell_integration: {
 }
 
 
-
+# TODO: use/source & sort (maybe fetch repo scripts & modules .. though I the current list is curated)
 
 # cmd 〉ls | get name | str join "\nuse "
 # use gen_json_schema.nu
 
-# module scripts
-use mkx.nu
-use ns.nu
+# modules
 use task.nu
 
-# collections & configs
-source one_liners.nu
+# scripts
 source helpers.nu
+source one_liners.nu
+use ns.nu
+use mkx.nu
+
+# repo scripts
+
+# repo modules
+
+# nu-hooks
+
+# completions
+
+# configs
 source starship.nu
 
 # generated
