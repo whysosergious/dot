@@ -2,19 +2,6 @@
 # TODO: login.nu cfg
 # TODO: init.nu - quick sourcing deps
 
-$env.NU_LIB_DIRS = [
-  ($nu.default-config-dir | path join 'repo_scripts') # add <nushell-config-dir>/repo_scripts
-  #repo_modules
-  ($nu.default-config-dir | path join 'repo_modules') # add <nushell-config-dir>/repo_modules
-  #completions
-  ($nu.default-config-dir | path join 'completions') # add <nushell-config-dir>/completions
-  #nu-hooks
-  ($nu.default-config-dir | path join 'nu-hooks') # add <nushell-config-dir>/nu-hooks
-  #modules
-  ($nu.default-config-dir | path join 'modules') # add <nushell-config-dir>/modules
-  #scripts
-  ($nu.default-config-dir | path join 'scripts') # add <nushell-config-dir>/scripts
-]
 $env.SHELL = nu
 $env.EDITOR = nvim
 $env.VISUAL = nvim

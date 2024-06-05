@@ -58,6 +58,7 @@ let packages = [
   "ripgrep",
   "carapache",
   "btm",
+  "watchexec",
 ]
 
 # install packages
@@ -118,6 +119,10 @@ print $"\n(ansi gb)installation done, restart your terminal(ansi reset)"
 
 def --env main [--cfg, --pkg, --nu-plg] { # nui - nu install
     let all = $cfg == false and $pkg == false and $nu_plg == false;
+
+    # install custom binaries
+
+  do { cd tools/run_with_monitor ; cargo b --release -Z unstable-options --out-dir ../../.bin/ }
 
     if $all or $cfg {
         mv_cfg
