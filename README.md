@@ -29,7 +29,7 @@ dot>to>not + not>to>dot scripts
 
 #### last thing to structure
 
--   [ ] separate cfgs to their own repos (term, shell, nvim ..) & git clone instead of cp
+-   [✔] separate cfgs to their own repos (term, shell, nvim ..) & git clone instead of cp
 
 ---
 
@@ -37,6 +37,8 @@ dot>to>not + not>to>dot scripts
 
 [ #rnd/testdrive.np ]
 
+-   [ ] toggleable snippets + multiple instances for easy experimentation & side-by-side comparison.
+-   [ ] extra points to provide a cointaining buffer that can do some ui and manage multiple of the same or unique plugins . can be a nice way to build components? this one is in my backlog so give it a shot.
 -   [ ] setup pckr for testdrive.np
 -   [ ] nu ccmd to query github repo after its readme
 -   [ ] nu ccmd q > readme | lines | each { |ln| $"--## ($ln)" } | ast-grep `$$$` | str replace "--## " " " [ - the above `insert>replace>indent` should make easy fold definitions - ]
