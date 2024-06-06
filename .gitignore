@@ -4,3 +4,4 @@ extensions
 node_modules
 .exe
 .dmg
+.tmp
