@@ -10,7 +10,7 @@
 # Usage
 #    Run `j` to jump around
 
-def autojump_add_to_database [dir] {
+def j_add_to_db [dir] {
         $env.AUTOJUMP_SOURCED = 1
         autojump --add $dir
 }
@@ -22,10 +22,10 @@ $env.config = ($env.config | upsert hooks.env_change.PWD {|config|
     let val = ($config | get -i hooks.env_change.PWD)
 
     if $val == null {
-        $val | append {|before, after| autojump_add_to_database $after }
+        $val | append {|before, after| j_add_to_db $after }
     } else {
         [
-            {|before, after| autojump_add_to_database $after }
+            {|before, after| j_add_to_db $after }
         ]
     }
 })
