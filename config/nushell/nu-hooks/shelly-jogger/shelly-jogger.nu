@@ -8,12 +8,18 @@
 
 
 $nu.config-path = ($env.config | update hooks.env_change.PWD {
-  append {
-    script: { ls | where name =~ '\.np$') }
 
-    if $script {
-      print (nu $script help)
-      ## sj nu $script
+let script =  (ls | where name =~ '\.np$' | get name);
+
+if $script {
+
+  append {
+    $script;
+               ## sj nu $script
     }
-	}
+}
+
+print (nu $script help)
+
+
 })

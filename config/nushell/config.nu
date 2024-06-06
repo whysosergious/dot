@@ -178,7 +178,7 @@ let zoxide_completer = {|spans: list<string>|
 
 # This completer will use carapace by default
 let carapace_completer = {|spans: list<string>|
-    carapace $spans.0 nushell ...$spans
+    carapace $spans.0 nushell .$spans
     | from json
     | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
 }
@@ -271,7 +271,7 @@ $env.config = ($env.config? | default {} | merge {
             trim: {
             methodology: wrapping # wrapping or truncating
             wrapping_try_keep_words: true # A strategy used by the 'wrapping' methodology
-            truncating_suffix: "..." # A suffix used by the 'truncating' methodology
+            truncating_suffix: "." # A suffix used by the 'truncating' methodology
         }
         # abbreviated_row_count: 10 # limit data rows from top and bottom after reaching a set point
     }
@@ -544,7 +544,7 @@ shell_integration: {
             return null
         }
 
-        print $"looking for Arch packages that might ship '($cmd_name)'..."
+        print $"looking for Arch packages that might ship '($cmd_name)'."
         let pkgs = pkgfile --binaries --verbose $cmd_name
         if ($pkgs | is-empty) {
             return null
@@ -1086,32 +1086,44 @@ $env.CARAPACE_COMPLETERS = (carapace git fish)
 print $"Carapace path: ($env.CARAPACE_BIN)"
 print $"Carapace completers: ($env.CARAPACE_COMPLETERS)"
 
-# TODO: use/source & sort (maybe fetch repo scripts & modules .. though I the current list is curated)
+# TODO: use/source & sort (maybe fetch repo scripts & modules  though I the current list is curated)
 
 # cmd 〉ls | get name | str join "\nuse "
 # use gen_json_schema.nu
 
-# modules
+
+
+# 1. modules
+# ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 use task.nu
 
-# scripts
+# 1.2 scripts
+# ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 source helpers.nu
 source one_liners.nu
 use ns.nu
 use mkx.nu
 
-# repo scripts
+
+# 2. repo scripts
+# ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 use to-json-schema.nu
+use repo modules
 
-# repo modules
+# 2.2 nu-hooks
+# ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 
-# nu-hooks
 
-# completions
+# 3.configs
+# ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 
-# configs
-source starship.nu
 
-# generated
+# 4. source starship.nu
+# ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+
+
+# 5. generated
+# ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 source ~/.cache/zoxide/init.nu
-source ~/.cache/carapace/init.nu
+source ~/.cache/carapace/init.nu:w
+

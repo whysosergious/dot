@@ -1,5 +1,6 @@
 #!/usr/bin/env nu
 
+rm -rf .tmp
 mkdir .tmp;
 let cargo_bin_path = ($nu.home-path | path join .cargo/bin);
 # before running this script, make sure you installed the following:
@@ -37,9 +38,6 @@ let nvim_config_dir = if $nu.os-info.name == "windows" {
 cp ./config/nushell $nu_config_dir -r;
 cp ./config/.wezterm.lua $"($nu.home-path)/.wezterm.lua";
 
-source $"($nu.home-path)/AppData/Roaming/nushell/config.nu";
-
-
 
 
 print "finished moving config files";
@@ -51,19 +49,34 @@ def --env install_packages [] {
 print "installing packages";
 
 let packages = [
-  "nu",
-  "broot",
-  "zoxide",
-  "jq",
-  "starship",
-  "fzf",
-  "ripgrep",
-  "carapache",
-  "btm",
-  "watchexec",
-  "lazygit",
-  "bun",
-  "deno",
+  # "nu",
+  # "zoxide",
+  # "starship",
+  # "broot",
+  # "btm",
+
+  # "jaq",
+  # "ripgrep", 
+  # "ast-grep",
+
+  ## group: [ watch -> act ]
+  # "checkexec",
+  # "systemfd",
+  # "watchexec-cli",
+  ## - 🌟🌟🌟
+
+  # "bun",
+  # "deno",
+
+#  __________________
+  #  		     #
+  #! - "carapace" - !# - https://github.com/carapace-sh/carapace-bin/releases 
+  #  	 	     #
+#  - -------------- -
+  #  	 	     #
+  #! -   "fzf"    - !# - installed through nvim 
+  #  	 	     #
+#  ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 ]
 
 # install packages
@@ -99,6 +112,9 @@ cargo install --path .tmp/nushell --all-features;
 
 # nvim cfg
   git clone $"https://github.com/whysosergious/pocketnvim.np" .tmp/nvim;
+
+cp .tmp/nvim ($nu.home-path | path join AppData/Local/nvim) -r
+
   }
 
 
@@ -139,18 +155,21 @@ def git_bin_or_build [name: string] {
 
   let local_repo = (pwd | path join $".tmp/($name)");
 
-  if (pwd | pth join $local_repo | !path exists) {
-    git clone $name $local_repo;
+  if (pwd | path join $local_repo | path exists) == false {
+    git clone ($'http://github.com/($name)') $local_repo;
   }
 
-  let realease_path = ($local_repo | path join "release/($nu.os-info.name)");
-  let bin_release =  ($realease_path | where name =~ $name | get name);
+  # let realease_path = ($local_repo | path join $"releases/($nu.os-info.name)");
+  # print $realease_path;
+  # let bin_release =  (ls $realease_path | where name =~ $name | get name);
 
-  print $bin_release;
+  # print $bin_release;
 
-  if ($bin_release | path exists) {
-    cp $bin_release $cargo_bin_path;
-  }
+  # if ($bin_release | path exists) {
+  #  cp $bin_release $cargo_bin_path;
+  # }
+
+cargo install --path $local_repo 
 
    print "done --------------"
 }
@@ -158,13 +177,15 @@ def git_bin_or_build [name: string] {
 
 
 def custom_bins [] {
-  git clone https://github.com/whysosergious/pocketnvim.np .tmp/nvim
+  ## git clone https://github.com/whysosergious/pocketnvim.np .tmp/nvim
 
   let np_modules = [
-    "whysosergious/run_with_monitor.np",
-    "whysosergious/shelly_jogger.np",
-  ] | each { |module| 
-    git_bin_or_build $module;
+    "whysosergious/run-with-monitor.np",
+    "whysosergious/shelly-jogger.np",
+  ] 
+
+  $np_modules | each { |module| 
+    git_bin_or_build $module
   }
 
   print "finished installing custom bins";
@@ -175,7 +196,7 @@ def custom_bins [] {
 
 # main 
 def --env main [--cfg, --pkg, --nu-plg, --np-bin] { # nui - nu install
-    let all = $cfg == false and $pkg == false and $nu_plg == false;
+    let all = $cfg == false and $pkg == false and $nu_plg == false and $np_bin == false;
 
     ## if (ls | where ) {
     ## $env.CARGO_BIN_PATH = ($nu.home-path | path join ~/.cargo/bin);

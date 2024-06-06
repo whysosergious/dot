@@ -310,6 +310,6 @@ zoxide init nushell | save -f ~/.cache/zoxide/init.nu
 
 
 # carapace
-$env.CARAPACE_BRIDGES = 'zsh,fish,bash,pwsh,inshellisense' # optional
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
 mkdir ~/.cache/carapace
 carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
