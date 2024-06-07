@@ -182,72 +182,20 @@ let carapace_completer = {|spans: list<string>|
     | from json
     | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
 }
-let external_completer = {|spans|
-    let expanded_alias = scope aliases
-    | where name == $spans.0
-    | get -i 0.expansion
+ let external_completer = {|spans|
 
-    let exp export alias pv = nvim 
-    | where name == $spans.0
-    | get -i 0.expansion
-
-    let spans = if $expanded_alias != null {
-        $spans
-        | skip 1
-        | prepend ($expanded_alias | split row ' ' | take 1)
-    } else {
-        $spans
-    }
-
-    match $spans.0 {
-        nu => $fish_completer
+     match $spans.0 {
+         # carapace completions are incorrect for nu
+         nu => $fish_completer
+         # fish completes commits and branch names in a nicer way
         git => $fish_completer
-        asdf => $fish_completer
-        __zoxide_z | __zoxide_zi => $zoxide_completer
-        _ => $carapace_completer
-    } | do $in $spans
-}
-    let spans = if $expanded_alias != null {
-        $spans
-        | skip 1
-        | prepend ($expanded_alias | split row ' ' | take 1)
-    } else {
-        $spans
-    }
-
-    match $spans.0 {
-        nu => $fish_completer
-        git => $fish_completer
-        asdf => $fish_completer
-        __zoxide_z | __zoxide_zi => $zoxide_completer
-        _ => $carapace_completer
-    } | do $in $spans
-}
-# let external_completer = {|spans|
-#     let expanded_alias = scope aliases
-#     | where name == $spans.0
-#     | get -i 0.expansion
-#
-#     let spans = if $expanded_alias != null {
-#         $spans
-#         | skip 1
-#         | prepend ($expanded_alias | split row ' ' | take 1)
-#     } else {
-#         $spans
-#     }
-#
-#     match $spans.0 {
-#         # carapace completions are incorrect for nu
-#         nu => $fish_completer
-#         # fish completes commits and branch names in a nicer way
-#        git => $fish_completer
-#         # carapace doesn't have completions for asdf
-#         asdf => $fish_completer
-#         # use zoxide completions for zoxide commands
-#         __zoxide_z | __zoxide_zi => $zoxide_completer
-#         _ => $carapace_completer
-#     } | do $in $spans
-# }
+         # carapace doesn't have completions for asdf
+         asdf => $fish_completer
+         # use zoxide completions for zoxide commands
+         __zoxide_z | __zoxide_zi => $zoxide_completer
+         _ => $carapace_completer
+     } | do $in $spans
+ }
 
 # The default config record. This is where much of your global configuration is setup.
 $env.config = ($env.config? | default {} | merge {
@@ -596,8 +544,8 @@ use mkx.nu
 
 # 2. repo scripts
 # ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
-use to-json-schema.nu
-use repo modules
+## use to-json-schema.nu
+## use repo_modules
 
 # 2.2 nu-hooks
 # ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
