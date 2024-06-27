@@ -38,6 +38,10 @@ let nvim_config_dir = if $nu.os-info.name == "windows" {
 cp ./config/nushell $nu_config_dir -r;
 cp ./config/.wezterm.lua $"($nu.home-path)/.wezterm.lua";
 
+# nvim cfg
+  git clone $"https://github.com/whysosergious/pocketnvim.np" .tmp/nvim;
+
+cp .tmp/nvim ($nu.home-path | path join AppData/Local/nvim) -r
 
 
 print "finished moving config files";
@@ -110,10 +114,6 @@ cargo install --path .tmp/nushell --all-features;
   if (pwd | path join ./tmp/nvim | path exists) == false {
 
 
-# nvim cfg
-  git clone $"https://github.com/whysosergious/pocketnvim.np" .tmp/nvim;
-
-cp .tmp/nvim ($nu.home-path | path join AppData/Local/nvim) -r
 
   }
 

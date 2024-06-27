@@ -1,0 +1,3 @@
+#export extern main [
+#    ...args
+#]

@@ -1,0 +1,92 @@
+cd C:\Users\sergi\AppData\Roaming\nushell\scripts\helpers.nu
+nvim C:\Users\sergi\AppData\Roaming\nushell\scripts\helpers.nu
+nu
+pv
+nvim
+pv
+nvim
+pv
+nvim
+nu
+nu
+nvim
+nu
+pv
+nvim
+config nu
+pv
+config nu
+pv C:\Users\sergi\AppData\Roaming\nushell\config.nu
+nvim C:\Users\sergi\AppData\Roaming\nushell\config.nu
+# Minimal config.nu<\n># Enable carapace completions<\n>$env.CARAPACE_BIN = (which carapace | get path)<\n>$env.PATH = ($env.PATH | prepend $env.CARAPACE_BIN)<\n><\n># Example: Enable git completions<\n>$env.CARAPACE_COMPLETERS = (carapace git fish)<\n><\n># Source Carapace initialization script<\n>source ~/.cache/carapace/init.nu<\n><\n># Simplified external completer function<\n>let external_completer = {|spans|<\n>    print $"Spans: ($spans)"<\n>    let expanded_alias = scope aliases<\n>    | where name == $spans.0<\n>    | get -i 0.expansion<\n><\n>    let spans = if $expanded_alias != null {<\n>        $spans<\n>        | skip 1<\n>        | prepend ($expanded_alias | split row ' ' | take 1)<\n>    } else {<\n>        $spans<\n>    }<\n><\n>    match $spans.0 {<\n>        nu => $fish_completer<\n>        git => $fish_completer<\n>        asdf => $fish_completer<\n>        __zoxide_z | __zoxide_zi => $zoxide_completer<\n>        _ => $carapace_completer<\n>    } | do $in $spans<\n>}<\n><\n># Set the external completer in the config<\n>$env.config = ($env.config? | default {} | merge {<\n>    completions: {<\n>        external: {<\n>            completer: $external_completer<\n>        }<\n>    }<\n>})
+pv
+nvim
+nvidia-smi.exe 
+cp AppData\LocalLow\Adobe\Linguistics\
+fmt Contacts\
+config nu
+jhg
+config nu
+carapace git Contacts\
+knnn
+hide AppData\
+$nu
+$env
+config
+$env.config
+$env.config.completions
+$env.config.completions.external
+$env.config.completions.external.completer = carapace
+$env.config.completions.external | upsert completer carapace
+git pwsh
+carapace -h
+carapace --list
+carapace -h
+nvim C:\Users\sergi\AppData\Roaming\nushell\config.nu
+cd C:\Users\sergi\AppData\Roaming
+cd carapace\
+ls
+nvim 
+ls
+ls -a
+cd specs\
+ls
+..
+rm -rf carapace\
+carapace -h
+..
+cd local
+ls
+cd carapace\
+carapace -h
+ls
+ls -a
+..
+cd Roaming\
+ls -a
+..
+ls -a
+nvim
+pv
+config nu
+o
+git pwsh AppData\
+..-
+config nu
+git-push 'eh'
+..
+:q
+cd Git\
+cd dot
+..
+cd dot\
+ls
+git-push 'eh'
+git add .
+git commit ''asddf
+git commit ''
+git commit 'a'
+git push
+git add .
+git commit -m 'a'
+git push

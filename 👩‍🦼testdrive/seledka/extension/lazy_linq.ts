@@ -1,1 +1,0 @@
-import { Lazy } from 'https://deno.land/x/lazy@v{version}/mod.ts' 

@@ -82,7 +82,7 @@ export def net_list [--process-stat (-p)] {
   $list
 }
 
-export def get-free-port [range_min:int = 1024, range_max: int = 65535] {
+export def get-free-port_OLD [range_min:int = 1024, range_max: int = 65535] {
   
   let used_ports = (net_list | where { |item| $item.local_port >= $range_min and $item.local_port <= $range_max } | get local_port);
   let all_ports = (seq $range_min $range_max);
@@ -90,7 +90,13 @@ export def get-free-port [range_min:int = 1024, range_max: int = 65535] {
 
   echo $free_ports.0
 }
-     
+
+export def get-free-port [range_min:int = 1024, range_max: int = 65535] {
+    echo port $range_min $range_max
+
+
+}
+
 export def get-remote-ip [] {
   if $env.OS == "Windows_NT" {
     ipconfig | lines | where { |item| $item =~ 'IPv4' } | split row ":" | get 1 | str trim
@@ -98,5 +104,94 @@ export def get-remote-ip [] {
     ifconfig | lines | where { |item| $item =~ 'inet ' } | split row " " | get 1 
   }
 }
+
+
+
+
+
+# ## we want to be able to define this custom command
+#
+# export def fetch [url: string, method: string = "GET"] {
+#
+#   let response = http $method $url;
+#
+#   $response
+# }
+#
+#
+# ## in typescript syntax. 
+#
+# export function fetch(url: string, method: string = "GET") {
+#
+#   let response = http method url;
+#
+#   $response
+# }
+#
+
+
+
+
+
+
+
+
+# run local scripts as a separate process. 'jog <cmd=main> <args>'
+export def --env --wrapped jog [...rest: string] {
+
+  let scripts = ls -a | where name =~ \.np$ | get name
+
+  if ($scripts | length) == 0 {
+    print "No scripts found"
+    return
+  }
+
+  mut script = ""
+
+  if ($scripts | length) == 1 {
+    
+$script = $scripts.0
+
+    
+  }
+
+  if ($scripts | length) > 1 {
+    
+ let input = $scripts | input list 'select the script to run'
+  if ($input | is-empty) == true {
+    print "canceled"
+    return
+  } else {
+  
+  print $"running ($input) ...$rest"
+  
+  return
+   }
+}
+    print $"running ($script)"
+
+    shelly-jogger nu $script ...$rest
+
+}
+
+
+
+
+
+
+
+
+
+
+
+# check and create a directory if it doesn't exist
+export def ensure_path_exists [path: string, create_missing: bool = true] {
+    if not ($path | path exists) {
+        if $create_missing {
+            mkdir $path
+        }
+    }
+}
+
 
 

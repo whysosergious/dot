@@ -90,3 +90,363 @@ git push
 git add .
 git commit -m 'a'
 git push
+nu install.nu --cfg
+-
+..
+cls
+cargo nu
+config nu
+:q
+Lazu.frpm
+.q
+nu
+config nu
+nu
+jog
+nu
+nu
+np
+jog
+np
+sq
+sqeel
+exit
+config nu
+pv
+nvim
+sqeel
+nvim
+nu
+nvim
+sq
+alias sqeel
+alias sqeel = stor
+sqeel
+sqeel help
+sqeel create help
+sqeel create 
+sqeel create ffs
+sqeel open
+sqeel ffs
+sqeel {a: str}
+alias sqeel bash
+sqeel {a: str}
+sqeel
+sqeel open | $nu.is-login
+--
+..
+ls
+cc DevToolsUser\
+cd DevToolsUser\
+cd DevToolsUser_ `Application Data\`_k
+ijhvioiö
+sqeel
+$nu
+def b[] {}
+def b [] {}
+b
+sqeel
+:qä
+:q
+q:
+:q
+cd C:\Users\sergi\AppData\Roaming\nushell
+pk
+pv
+nvim
+sq
+seqä
+seq
+seq 6..
+seq 6...
+seq 6..5p
+seq 6..500
+seq 6 500
+seq 6 completions\-h
+sq
+sqreel
+sqeel
+config nu
+sqeel
+config nu
+:q
+stor
+-h
+-help
+nu
+nu
+-h
+stor -h
+stor create
+stor create --table-name pp --columns  {h: str}
+stor create --table-name pp --rows[1 9]
+stor create --table-name pp --help
+config nu
+pv
+nu
+nu
+config nu
+pv
+nvim
+pv
+config nu
+zo
+zi
+jog 
+zi
+zoxide 
+zoxide query
+pwd
+cd AppData\Roaming\nushell\
+ls
+cd scripts\
+ls
+..
+nvim
+stor export --help 
+nu
+zi
+stor export --help 
+database
+nu
+config nu
+zi
+pv
+nvim
+pwd
+zi
+--
+..
+msys2\home\sergi\
+cd open-webui\backend\
+zi
+cd nu
+zi
+nu
+nu
+nu
+open config nu
+open $nu.config-path
+clear
+nu
+zi
+nu
+jog  srv --master
+..
+cd shelly\
+nu
+zi
+zoxisw
+zoxide
+config env
+clear
+ny
+ni
+bu
+zi
+cd AppData\Roaming\nushell\
+cd 
+zi
+pv
+zoxisw
+zoxide
+zoxide init
+zoxide init nu
+zoxide init nushell
+$nu.env-path
+C:\Users\sergi\AppData\Roaming\nushell
+ls
+-pv 
+zi
+..
+cd
+pwd
+cd AppData\Local\nvim
+zi w
+zi
+cd AppData\Local\nvim
+z shelly
+z shelly
+zi
+z shelly
+z scripts\
+---
+...
+cd !work\
+...1XXX
+config env
+BuilderBlock.d.ts
+interface BaseBlock {<\n>  id: string;<\n>  iid?: string;<\n>  name?: string;<\n>  is?: stringPV;<\n>  description?: string;<\n>}
+PV
+jog  srv --master
+cd !work\
+cc DevToolsUser\
+PV
+jog  srv --master
+cd !active\wss\shelly\
+jog  srv --master
+config env
+zi
+pv
+nvim
+jog  srv --master
+pwd
+zi
+z
+__zoxide_z
+z shelly
+pwd
+cd !active\wss\shelly\
+jog  srv --master
+pwd
+cd ..
+..
+cd !active\wss\shelly\
+cd !active\wss\shelly\cd  !work\
+cd !active\wss\shelly\cd
+cd !work\
+cd !active\wss\shelly\
+jog  srv --master
+cd open-webui\backend\
+z backend
+__zoxide_z
+z backend
+zoxide
+cd open-webui\backend\
+..
+cd open-webui\backend\
+cd sergi\...
+cd msyn
+cd msys2
+cd open-webui\backend\
+cd home\sergi\open-webui\backend\
+jog  srv --master
+.\start_windows.bat
+zoxide shelly
+cd sergi\...
+cd sergi\
+cd AppData\Local\nvim
+zi 
+alias q =  zoxide
+q
+alias qi =  __zoxide_z
+qi
+q wss
+cd
+....
+cd !work\!active\wss\
+q
+q add7
+q add
+q add .
+cd shelly\
+q add .
+pv
+pwd
+pv
+nu
+nu
+/nu
+zi
+cd 
+pwd
+..
+cd !work\!active\wss\
+cd shelly-keys\
+cargo b
+clear
+nu
+nu
+nu
+zi
+z
+zoxide shelly
+zoxide AppData\
+zoxide.
+...
+cd !work\!active\wss\
+zoxide .
+zoxide add .
+z
+pv
+*nu
+clear
+pvb
+pv
+zi
+z
+zoxide
+zoxide shelly
+zoxide query shelly
+config env
+DDDD nu
+nvim
+ls
+pwd
+cd AppData\
+cd Roaming\nushell\
+open env.nu
+:q
+commandline edit }
+commandline edit '}'
+config nu
+nvim
+--
+exit
+nu
+nu
+pwd
+cd Roaming\nushell\
+cd appdata/Roaming\nushell\
+pwd
+:q
+nu
+nu
+nu
+§
+/carapace_
+/
+....
+xöd-äcå¨´'<\n>dsw'qAÄ_Zöå¨'xdsq<\n>'
+zzzzz
+hisr
+unu
+clear
+}:w
+} :w
+: w
+ppppp nu
+:q
+nu
+zi
+cargo-binstall zoxide
+zi
+zoxide init nushell
+config nu
+$env.Editor = nvim
+config nu
+$env.EDITOR = nvim
+config nu
+$env.config.buffer_editor = nvim
+config env
+$env.config.buffer_editor = nvim
+config env
+z
+zi
+pv
+nvim
+cd lua\
+ls
+..
+ls
+nvim init.lua
+cd 
+ls
+pv
+nvim
+zi
+ls
+pv
+cargo-binstall starship
+ls
+zi
